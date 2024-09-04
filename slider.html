@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    <style>
+        body{
+            font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+        table {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container" align="center">
+        <h1>RECORDS</h1>
+
+        <button id="sum" onclick="showsum()" class="btn btn-dark">Salary Sum</button>
+        <button id="city" onclick="showcity()" class="btn btn-dark">city wise filter record</button>
+        <button id="salary" onclick="showsalary()" class="btn btn-dark">salary wise filter record</button>
+        <button id="desig" onclick="showdesig()" class="btn btn-dark">designation wise filter record</button>
+        <button id="depart" onclick="showdep()" class="btn btn-dark">department wise filter record</button>
+        <table border="1" id="record-table" class="table table-dark table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>City</th>
+                    <th>Salary</th>
+                    <th>Designation</th>
+                    <th>Department</th>
+                </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+        </table>
+    </div>
+
+    <script>
+        let records = [
+            {
+                id: 1,
+                name: "Ashish",
+                email: "ashu@gmail.com",
+                phone: "1121212",
+                city: "Surat",
+                salary: 20000,
+                degi: "Senior",
+                dep: "Programming",
+            },
+
+            {
+                id: 2,
+                name: "Hari",
+                email: "hari@gmail.com",
+                phone: "5454545",
+                city: "Surat",
+                salary: 22000,
+                degi: "Junior",
+                dep: "UI/UX",
+            },
+
+            {
+                id: 3,
+                name: "Raj",
+                email: "raj@gmail.com",
+                phone: "454545",
+                city: "Vadodara",
+                salary: 25000,
+                degi: "Junior",
+                dep: "BDE",
+            },
+
+            {
+                id: 4,
+                name: "Deep",
+                email: "deep@gmail.com",
+                phone: "565656",
+                city: "Vapi",
+                salary: 30000,
+                degi: "TL",
+                dep: "Web Design",
+            },
+
+            {
+                id: 5,
+                name: "Jay",
+                email: "jay@gmail.com",
+                phone: "5565656",
+                city: "Rajkot",
+                salary: 20000,
+                degi: "Senior",
+                dep: "Programming",
+            },
+
+            {
+                id: 6,
+                name: "Ajay",
+                email: "ajay@gmail.com",
+                phone: "5565656",
+                city: "Vapi",
+                salary: 25000,
+                degi: "Manager",
+                dep: "UI/UX",
+            }
+        ];
+
+        function showRecord (records) {
+            let tbl = "";
+            records.map((record) =>{
+                tbl += `
+                <tr>
+                    <td>${record.id}</td>
+                    <td>${record.name}</td>
+                    <td>${record.email}</td>
+                    <td>${record.phone}</td>
+                    <td>${record.city}</td>
+                    <td>${record.salary}</td>
+                    <td>${record.degi}</td>
+                    <td>${record.dep}</td>
+                </tr>
+                `
+            });
+            document.getElementById('tbody').innerHTML = tbl ;
+        }
+
+        showRecord(records);
+
+        // Salary sum button click event
+        function showsum() {
+            let salarySum = 0;
+              for (let i = 0; i < records.length; i++) {
+                salarySum += records[i].salary;
+            }
+               alert(`Salary Sum: ${salarySum}`);
+            }
+
+        // City wise filter button click event
+        function showcity () {
+            let city = prompt('Enter a City Name : ')
+            let cityrecord = records.filter(record => record.city.toLowerCase() === city.toLowerCase());
+            showRecord(cityrecord)
+        }
+
+         // Salary wise filter button click event
+          function showsalary() {
+            let salary = parseInt(prompt('Enter salary : '));
+            let salaryrecord = records.filter (record => record.salary >= salary);
+            showRecord(salaryrecord);
+          }
+
+          // Designation wise filter button click event
+             function showdesig (){
+                let designation = prompt('Enter Designation : ');
+                let desigrecord = records.filter(record => record.degi.toLowerCase() === designation.toLowerCase());
+                showRecord(desigrecord);
+             }
+
+        // Department wise filter button click event
+            function showdep () {
+                let department = prompt('Enter Department Name : ');
+                let departrecord = records.filter(record => record.dep.toLowerCase() === department.toLowerCase());
+                showRecord(departrecord);
+            }
+    </script>
+</body>
+</html>
